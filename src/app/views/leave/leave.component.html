@@ -1,0 +1,24 @@
+<div class="main_header">
+    <div class="header_title">
+        <h5> Leave Management </h5>
+    </div>
+    <div class="card_body_wrap">
+    <kendo-tabstrip>
+      <kendo-tabstrip-tab title="Application" [selected]="true">
+        <ng-template kendoTabContent>
+          <app-leave-application></app-leave-application>
+        </ng-template>
+      </kendo-tabstrip-tab>
+      <kendo-tabstrip-tab title="Leave Assign">
+        <ng-template kendoTabContent>
+          <app-leave-assign></app-leave-assign>
+        </ng-template>
+      </kendo-tabstrip-tab>
+      <kendo-tabstrip-tab title="Leave Transaction">
+        <ng-template kendoTabContent>
+          <app-leave-transaction></app-leave-transaction>
+        </ng-template>
+      </kendo-tabstrip-tab>
+    </kendo-tabstrip>
+
+</div>

@@ -1,0 +1,32 @@
+<div class="main_header">
+  <div class="header_title">
+    <h5> Employee </h5>
+  </div>
+  <div class="card_body_wrap">
+    <kendo-tabstrip>
+      <kendo-tabstrip-tab title="Details" [selected]="true">
+        <ng-template kendoTabContent>
+          <app-employee-details></app-employee-details>
+        </ng-template>
+      </kendo-tabstrip-tab>
+      <kendo-tabstrip-tab title="Qualification">
+        <ng-template kendoTabContent>
+          <app-employee-qualification></app-employee-qualification>
+        </ng-template>
+      </kendo-tabstrip-tab>
+      <kendo-tabstrip-tab title="Experience">
+        <ng-template kendoTabContent>
+          <app-employee-experience></app-employee-experience>
+        </ng-template>
+      </kendo-tabstrip-tab>
+      <kendo-tabstrip-tab title="Document">
+        <ng-template kendoTabContent>
+          <app-employee-document></app-employee-document>
+        </ng-template>
+      </kendo-tabstrip-tab>
+    </kendo-tabstrip>
+  </div>
+</div>
+
+
+

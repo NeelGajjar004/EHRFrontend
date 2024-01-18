@@ -1,0 +1,113 @@
+<div class="main_header">
+    <div class="header_title">
+        <div class="row">
+            <div class="col-md-10">
+                <h5> Department </h5>
+            </div>
+            <div class="col-md-2 mt-3">
+                <button kendoButton title="Add Department" (click)="openDepartment()" >+ Add Department</button>
+            </div>
+        </div>
+    </div>
+    <div class="card_body_wrap">
+
+        <kendo-grid [data]="DepartmentList">
+
+            <kendo-grid-column title="Action">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <div style="display: flex;">
+                            <button kendoButton title="Edit Department" (click)="editDepartment(dataItem.departmentId)">Edit</button>&nbsp;
+                            <button kendoButton title="Delete Department" (click)="openDelete(dataItem.departmentId)">Delete</button>
+                        </div>
+                </ng-template>    
+            </kendo-grid-column>
+
+            <kendo-grid-column field="departmentName" title="Department"> 
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <span class=" block">
+                        {{dataItem.departmentName}}
+                    </span>
+                </ng-template>
+            </kendo-grid-column>
+            
+            <kendo-grid-column field="departmentCode" title="Code">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <span class=" block">
+                        {{dataItem.departmentCode}}
+                    </span>
+                </ng-template>
+            </kendo-grid-column>
+        
+        </kendo-grid>
+
+    </div>
+</div>
+
+
+<!-- ****** Delete Department Dialog ****** -->
+<kendo-dialog
+    title="Alert"
+    *ngIf="openedDel"
+    (close)="closeDelete()"
+    [minWidth]="250"
+    [width]="450">
+        <p style="margin: 5px; text-align: left;">
+            Are you sure you want to delete?
+        </p>
+        <kendo-dialog-actions>
+            <button kendoButton  title="Delete Designation" (click)="deleteDesignation(DeleteDeptID)" themeColor="primary">Delete</button>
+        </kendo-dialog-actions>
+</kendo-dialog>
+
+
+<!-- ****** Create & Edit Department Dialog ****** -->
+<kendo-dialog
+    title="{{this.ButtonTitle}} Designation"
+    *ngIf="opened"
+    (close)="closeDepartment()"
+    [minWidth]="250"
+    [width]="450">
+       <div style="margin: 5px; text-align: left;">
+        <!-- <i class="spinner-grow spinner-grow-sm"></i>
+        <span class="m-1">Loading...</span> -->
+            <form [formGroup]="deptForm">
+
+                <div class="form-group mt-2">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="input-field" style="display: flex;" [class.error]="deptForm.controls['deptName'].dirty && deptForm.hasError('required','deptName')">
+                                <label style="margin-top: 1px;" for="departmentName">Department Name</label>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" formControlName="deptName" style="width: 100%;">
+                        </div>
+                    </div>
+                </div>
+                <small *ngIf="deptForm.controls['deptName'].dirty && deptForm.hasError('required','deptName')" class="text-danger">*Department Name is Required!</small>
+                    
+                <div class="form-group mt-3">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="input-field" [class.error]="deptForm.controls['deptCode'].dirty && deptForm.hasError('required','deptCode')">
+                                <label style="margin-top: 1px;" for="departmentCode">Department Code</label>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" formControlName="deptCode" style="width: 100%;">
+                        </div>
+                    </div>
+                </div>
+                <small *ngIf="deptForm.controls['deptCode'].dirty && deptForm.hasError('required','deptCode')" class="text-danger">*Deaprtment Code is Required!</small>
+
+            </form>
+
+        </div>
+        <kendo-dialog-actions>
+            <button kendoButton title="{{this.ButtonTitle}} Department"  (click)="addDepartment()" themeColor="primary">
+                {{this.ButtonTitle}}
+            </button>
+        </kendo-dialog-actions>
+</kendo-dialog>
+
+

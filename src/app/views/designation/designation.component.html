@@ -1,0 +1,110 @@
+<div class="main_header">
+    <div class="header_title">
+        <div class="row">
+            <div class="col-md-10">
+                <h5> Designation </h5>
+            </div>
+            <div class="col-md-2 mt-3">
+                <button kendoButton title="Add Designation" (click)="openDesignation()">+ Add Designation</button>
+            </div>
+        </div>
+    </div>
+        
+    <div class="card_body_wrap">
+        <kendo-grid [data]="DesignationList">
+            
+            <kendo-grid-column title="Action">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <div style="display: flex;">
+                        <button kendoButton title="Edit Designation" (click)="editDesignation(dataItem.designationId)">Edit</button>&nbsp;
+                            <button kendoButton title="Delete Designation" (click)="openDelete(dataItem.designationId)">Delete</button>
+                        </div>
+                </ng-template>    
+            </kendo-grid-column>
+
+            <kendo-grid-column field="designationName" title="Designation"> 
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <span class=" block">
+                        {{dataItem.designationName}}
+                    </span>
+                </ng-template>
+            </kendo-grid-column>
+            
+            <kendo-grid-column field="designationCode" title="Code">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <span class=" block">
+                        {{dataItem.designationCode}}
+                    </span>
+                </ng-template>
+            </kendo-grid-column>
+            
+        </kendo-grid>
+    </div>
+</div>
+
+
+<!-- ****** Delete Designation Dialog ****** -->
+<kendo-dialog
+    title="Alert"
+    *ngIf="openedDel"
+    (close)="closeDelete()"
+    [minWidth]="250"
+    [width]="450">
+        <p style="margin: 5px; text-align: left;">
+            Are you sure you want to delete?
+        </p>
+        <kendo-dialog-actions>
+            <button kendoButton  title="Delete Designation" (click)="deleteDesignation(DeleteDesignID)" themeColor="primary">Delete</button>
+        </kendo-dialog-actions>
+</kendo-dialog>
+
+
+<!-- ****** Create & Edit Designation Dialog ****** -->
+<kendo-dialog
+    title="{{this.ButtonTitle}} Designation"
+    *ngIf="opened"
+    (close)="closeDesignation()"
+    [minWidth]="250"
+    [width]="450">
+       <div style="margin: 5px; text-align: left;">
+        <!-- <i class="spinner-grow spinner-grow-sm"></i>
+        <span class="m-1">Loading...</span> -->
+            <form [formGroup]="designForm">
+
+                <div class="form-group mt-2">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="input-field" style="display: flex;" [class.error]="designForm.controls['designName'].dirty && designForm.hasError('required','designName')">
+                                <label style="margin-top: 1px;" for="designationName">Designation Name</label>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" formControlName="designName" style="width: 100%;">
+                        </div>
+                    </div>
+                </div>
+                <small *ngIf="designForm.controls['designName'].dirty && designForm.hasError('required','designName')" class="text-danger">*Designation Name is Required!</small>
+                    
+                <div class="form-group mt-3">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="input-field" [class.error]="designForm.controls['designCode'].dirty && designForm.hasError('required','designCode')">
+                                <label style="margin-top: 1px;" for="designationCode">Designation Code</label>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" formControlName="designCode" style="width: 100%;">
+                        </div>
+                    </div>
+                </div>
+                <small *ngIf="designForm.controls['designCode'].dirty && designForm.hasError('required','designCode')" class="text-danger">*Designation Code is Required!</small>
+
+            </form>
+
+        </div>
+        <kendo-dialog-actions>
+            <button kendoButton title="{{this.ButtonTitle}} Designation"  (click)="ondesignAdd()" themeColor="primary">
+                {{this.ButtonTitle}}
+            </button>
+        </kendo-dialog-actions>
+</kendo-dialog>

@@ -1,0 +1,239 @@
+<div class="main_header">
+    <div class="header_title">
+        <div class="row">
+            <div class="col-md-10">
+                <h5> Employees Details </h5>
+            </div>
+            <div class="col-md-2 mt-3">
+                <button kendoButton title="Add Employee" (click)="openEmployee()">+ Add Employee</button>
+            </div>
+        </div>
+    </div>
+        
+    <div class="card_body_wrap">
+        <kendo-grid [data]="EmployeeList"
+        [pageable]="true"
+        [pageSize]="5">
+            
+            <kendo-grid-column title="Action" [width]="123">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <div style="display: flex;">
+                            <button kendoButton title="Edit Employee" (click)="editEmployee(dataItem.employeeId)">Edit</button>&nbsp;
+                            <button kendoButton title="Delete Employee" (click)="deleteEmployee(dataItem.employeeId)">Delete</button>
+                        </div>
+                </ng-template>    
+            </kendo-grid-column>
+
+            <kendo-grid-column field="employeeCode" title="Code" [width]="80"> 
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <span class=" block">
+                        {{dataItem.employeeCode}}
+                    </span>
+                </ng-template>
+            </kendo-grid-column>
+            
+            <kendo-grid-column field="firstName" title="First Name" [width]="100">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    {{dataItem.firstName}}
+                </ng-template>
+            </kendo-grid-column>
+
+            <kendo-grid-column field="middleName" title="Middle Name" [width]="110">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    {{dataItem.middleName}}
+                </ng-template>
+            </kendo-grid-column>
+
+            <kendo-grid-column field="lastName" title="Last Name" [width]="105">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    {{dataItem.lastName}}
+                </ng-template>
+            </kendo-grid-column>
+            
+            <kendo-grid-column field="designation" title="Designation" [width]="100">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    {{dataItem.designation}}
+                </ng-template>
+            </kendo-grid-column>
+
+            <kendo-grid-column field="department" title="Department" [width]="100">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    {{dataItem.department}}
+                </ng-template>
+
+            </kendo-grid-column>
+
+            <kendo-grid-column field="dateofBirth" title="Birth Date" [width]="105">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    {{dataItem.dateofBirth}}
+                </ng-template>
+            </kendo-grid-column>
+
+            <kendo-grid-column field="mobileNo" title="Mobile No" [width]="105">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    {{dataItem.mobileNo}}
+                </ng-template>
+            </kendo-grid-column>
+
+            <kendo-grid-column field="gender" title="Gender" [width]="80">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    {{dataItem.gender}}
+                </ng-template>
+            </kendo-grid-column>
+
+            <kendo-grid-column field="address" title="Address" [width]="100">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    {{dataItem.address}}
+                </ng-template>
+            </kendo-grid-column>
+
+            <kendo-grid-column field="city" title="City" [width]="90">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    {{dataItem.city}}
+                </ng-template>
+            </kendo-grid-column>
+
+            <kendo-grid-column field="state" title="State" [width]="100">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    {{dataItem.state}}
+                </ng-template>
+            </kendo-grid-column>
+
+            <kendo-grid-column field="pincode" title="Pincode" [width]="95">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    {{dataItem.pincode}}
+                </ng-template>
+            </kendo-grid-column>
+
+            <kendo-grid-column field="emailId" title="Email Address" [width]="150">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    {{dataItem.emailId}}
+                </ng-template>
+            </kendo-grid-column>
+            
+            <kendo-grid-column field="maritalStatus" title="Marital Status" [width]="110">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    {{dataItem.maritalStatus}}
+                </ng-template>
+            </kendo-grid-column>
+
+            <kendo-grid-column field="dateofJoining" title="Joining Date" [width]="110">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    {{dataItem.dateofJoining}}
+                </ng-template>
+            </kendo-grid-column>
+            
+            <kendo-grid-column field="employeeImage" title="Image" [width]="110">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <img src="" alt="Image Not Found" width="100px" height="80px">
+                    <!-- https://localhost:7084/api/Employees/{{dataItem.employeeImage}} -->
+                </ng-template>
+            </kendo-grid-column>
+            
+            <kendo-grid-column field="resignDate" title="Resign Date" [width]="110">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    {{dataItem.resignDate}}
+                </ng-template>
+            </kendo-grid-column>
+            
+            <kendo-grid-column field="leaveDate" title="Leave Date" [width]="110">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    {{dataItem.leaveDate}}
+                </ng-template>
+            </kendo-grid-column>
+            
+            <kendo-grid-column field="remark" title="Remark" [width]="100">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    {{dataItem.remark}}
+                </ng-template>
+            </kendo-grid-column>
+            
+        </kendo-grid>
+    </div>
+</div>
+
+
+
+
+<!-- ****** Create Employee Dialog ****** -->
+<kendo-dialog
+    title="Employee Personal Details"
+    *ngIf="opened"
+    (close)="closeEmployee()"
+    [minWidth]="500"
+    [width]="1100">
+        <form [formGroup]="EmpForm">
+
+            <!-- <div class="form-group mt-2">
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="input-field" style="display: flex;" [class.error]="EmpForm.controls['empCode'].dirty && EmpForm.hasError('required','empCode')">
+                            <label for="EmployeeCode">Employee Code : </label>
+                        </div>
+                        <input type="text" formControlName="empCode" style="width: 90%;">
+                        <small *ngIf="EmpForm.controls['empCode'].dirty && EmpForm.hasError('required','empCode')" class="text-danger">*Employee Code is Required!</small>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="input-field" style="display: flex;" [class.error]="EmpForm.controls['firstName'].dirty && EmpForm.hasError('required','firstName')">
+                            <label for="FirstName">FirstName</label>
+                        </div>
+                        <input type="text" formControlName="firstName" style="width: 100%;">
+                        <small *ngIf="EmpForm.controls['firstName'].dirty && EmpForm.hasError('required','firstName')" class="text-danger">*First Name is Required!</small>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="input-field" style="display: flex;" [class.error]="EmpForm.controls['middleName'].dirty && EmpForm.hasError('required','middleName')">
+                            <label for="MiddleName">MiddleName</label>
+                        </div>
+                        <input type="text" formControlName="middleName" style="width: 100%;">
+                        <small *ngIf="EmpForm.controls['middleName'].dirty && EmpForm.hasError('required','middleName')" class="text-danger">*Middle Name is Required!</small>
+                    </div>
+
+                </div>
+            </div> -->
+
+            <div class="form-group mt-2">
+                <div class="row">
+
+                    <div class="col-md-4">
+                       
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="department">Department : </label>
+                        <kendo-dropdownlist
+                            [data]="DepartmentList"
+                            formControlName = "department"
+                            textField="departmentName"
+                            valueField="departmentName"
+                        >
+                        </kendo-dropdownlist>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="designation">Designation : </label>
+                        <kendo-dropdownlist
+                            [data]="DesignationList"
+                            formControlName = "designation"
+                            textField="designationName"
+                            valueField="designationName"
+                        >
+                        </kendo-dropdownlist>
+                    </div>
+
+                </div>
+            </div>
+                
+                    
+                
+
+            </form>
+             
+        <kendo-dialog-actions>
+            <button kendoButton title="{{this.ButtonTitle}} Designation"  (click)="addEmployee()" themeColor="primary" [disabled]="true">
+                {{this.ButtonTitle}}
+            </button>
+        </kendo-dialog-actions>
+</kendo-dialog>
